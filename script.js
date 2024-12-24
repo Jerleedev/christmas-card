@@ -3,12 +3,14 @@ const canvas = document.getElementById('snowCanvas');
 const ctx = canvas.getContext('2d');
 const button = document.querySelector('button');
 const card = document.querySelector('.card');
+const backgroundAudio = document.getElementById('backgroundAudio');
+
 
 document.addEventListener('click', (event) => {
-  // Check if clicked element is the card or its children
-  if (event.target.closest('.card')) {
-    card.classList.toggle('flipped');
-  }
+    // Check if clicked element is the card or its children
+    if (event.target.closest('.card')) {
+        card.classList.toggle('flipped');
+    }
 });
 // Tự động điều chỉnh kích thước canvas theo màn hình
 function resizeCanvas() {
@@ -37,13 +39,13 @@ function drawSnowflakes() {
         ctx.fill();
         flake.x += flake.speedX;
         flake.y += flake.speedY;
-
+        
         // Nếu bông tuyết rơi khỏi màn hình, đưa nó lên lại từ trên
         if (flake.y > canvas.height) {
             flake.y = -flake.radius;
             flake.x = Math.random() * canvas.width;
         }
-
+        
         // Nếu bông tuyết di chuyển ngang ra ngoài màn hình
         if (flake.x > canvas.width) {
             flake.x = 0;
@@ -52,6 +54,7 @@ function drawSnowflakes() {
         }
     });
     requestAnimationFrame(drawSnowflakes); // Lặp lại hiệu ứng
+backgroundAudio.volume = 50;
 }
 
 drawSnowflakes();
